@@ -346,6 +346,54 @@
     color:#9BAE87;
   }
 
+  /* ---------- GEOTAG OVERLAY (live) ---------- */
+  .geotag-overlay{
+    position:absolute; left:0; right:0; bottom:0;
+    display:none;
+    padding:14px 16px 12px;
+    background:linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(10,16,7,0.82) 55%, rgba(10,16,7,0.92) 100%);
+    color:#fff;
+  }
+  .cam-frame.live .geotag-overlay{display:block;}
+  .geotag-row{
+    display:flex; align-items:center; gap:8px;
+    font-size:0.78rem; line-height:1.4;
+  }
+  .geotag-row svg{width:13px; height:13px; flex-shrink:0; opacity:0.9;}
+  .geotag-coords{font-family:'Fraunces', serif; font-weight:600; font-size:0.85rem;}
+  .geotag-address{opacity:0.9;}
+  .geotag-time{opacity:0.75; font-size:0.72rem; margin-top:2px;}
+  .geotag-brand{
+    display:flex; align-items:center; gap:5px;
+    font-size:0.7rem; opacity:0.7; margin-top:6px; letter-spacing:0.03em;
+  }
+
+  /* ---------- CAPTURE BUTTON ---------- */
+  .btn-capture{
+    background:transparent; border-color:rgba(246,242,228,0.4); color:var(--cream);
+  }
+  .btn-capture:hover{background:rgba(246,242,228,0.1);}
+  .btn-capture:disabled{opacity:0.4; cursor:not-allowed;}
+
+  /* ---------- CAPTURED PHOTO RESULT ---------- */
+  .capture-result{
+    margin-top:24px;
+    display:none;
+  }
+  .capture-result.show{display:block;}
+  .capture-result h4{
+    font-size:0.85rem; color:var(--cream); margin-bottom:12px; font-weight:600;
+  }
+  .capture-result img{
+    width:100%; border:1px solid rgba(246,242,228,0.2);
+  }
+  .capture-actions{
+    display:flex; gap:10px; margin-top:12px;
+  }
+  .capture-actions a, .capture-actions button{
+    font-size:0.82rem;
+  }
+
   .verify-card{
     border:1px solid rgba(246,242,228,0.2);
     padding:28px;
@@ -432,6 +480,323 @@
     display:flex; justify-content:space-between; flex-wrap:wrap; gap:12px;
     font-size:0.8rem; color:#6B7360;
   }
+
+  /* ---------- AUTH: nav state ---------- */
+  .auth-area{display:flex; align-items:center; gap:14px;}
+  .user-chip{
+    display:none;
+    align-items:center; gap:10px;
+    font-size:0.9rem;
+  }
+  .user-chip .avatar{
+    width:30px; height:30px; border-radius:50%;
+    background:var(--moss); color:var(--cream);
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Fraunces', serif; font-weight:600; font-size:0.9rem;
+  }
+  .user-chip button{
+    background:none; border:none; color:var(--forest);
+    text-decoration:underline; cursor:pointer; font-size:0.85rem;
+    font-family:'Work Sans', sans-serif;
+  }
+
+  /* ---------- AUTH: modal ---------- */
+  .modal-overlay{
+    display:none;
+    position:fixed; inset:0; z-index:100;
+    background:rgba(20,26,14,0.55);
+    align-items:center; justify-content:center;
+    padding:20px;
+  }
+  .modal-overlay.open{display:flex;}
+
+  /* ---------- AUTH: full-screen takeover, terpisah dari halaman utama ---------- */
+  #authOverlay .modal-close{display:none;}
+  #authOverlay{
+    background:var(--forest);
+    padding:0;
+  }
+  #authOverlay .auth-box{
+    max-width:400px;
+    width:100%;
+    box-shadow:none;
+    background:transparent;
+  }
+  #authOverlay .auth-bottom{
+    background:var(--cream);
+    min-height:auto;
+  }
+  @media (max-width:640px){
+    #authOverlay .auth-box{
+      max-width:100%;
+      height:100%;
+      display:flex;
+      flex-direction:column;
+    }
+    #authOverlay .auth-top{
+      height:34vh;
+      flex-shrink:0;
+    }
+    #authOverlay .auth-bottom{
+      flex:1;
+      border-radius:46% 46% 0 0 / 60px 60px 0 0;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+    }
+  }
+
+  .modal-box{
+    background:var(--cream);
+    max-width:400px; width:100%;
+    padding:36px 32px;
+    border:1px solid var(--line);
+    position:relative;
+  }
+  .modal-box h3{font-size:1.3rem; margin-bottom:6px;}
+  .modal-box .modal-sub{font-size:0.88rem; color:#5A6250; margin-bottom:26px;}
+  .modal-close{
+    position:absolute; top:16px; right:16px;
+    background:none; border:none; cursor:pointer;
+    font-size:1.1rem; color:var(--ink); line-height:1;
+    padding:4px;
+  }
+  .field{margin-bottom:16px;}
+  .field label{
+    display:block; font-size:0.82rem; color:var(--forest);
+    margin-bottom:6px; font-weight:600;
+  }
+  .field input{
+    width:100%; padding:11px 12px;
+    border:1px solid var(--line); background:var(--paper);
+    font-family:'Work Sans', sans-serif; font-size:0.95rem;
+    color:var(--ink);
+  }
+  .field input:focus{outline:2px solid var(--moss); outline-offset:1px;}
+  .modal-error{
+    font-size:0.82rem; color:#B23A2E; margin-bottom:14px; display:none;
+  }
+  .modal-error.show{display:block;}
+  .modal-submit{
+    width:100%; justify-content:center; margin-top:6px;
+  }
+  .modal-switch{
+    margin-top:18px; font-size:0.85rem; text-align:center; color:#5A6250;
+  }
+  .modal-switch button{
+    background:none; border:none; color:var(--moss-dark);
+    text-decoration:underline; cursor:pointer; font-weight:600;
+    font-family:'Work Sans', sans-serif; font-size:0.85rem;
+  }
+
+  /* ---------- AUTH BOX: gaya kurva ala video ---------- */
+  .auth-box{
+    background:var(--cream);
+    max-width:380px; width:100%;
+    border-radius:2px;
+    overflow:hidden;
+    position:relative;
+    box-shadow:0 20px 60px rgba(0,0,0,0.25);
+  }
+  .auth-close{
+    background:rgba(0,0,0,0.15); color:#fff;
+    width:30px; height:30px; border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    font-size:0.95rem; z-index:5;
+  }
+  .auth-top{
+    background:var(--forest);
+    height:130px;
+    position:relative;
+  }
+  .auth-logo{
+    position:absolute; left:50%; bottom:-26px; transform:translateX(-50%);
+    width:64px; height:64px; border-radius:50%;
+    background:var(--cream);
+    display:flex; align-items:center; justify-content:center;
+    box-shadow:0 8px 20px rgba(0,0,0,0.18);
+    z-index:3;
+  }
+  .auth-logo svg{width:32px; height:32px;}
+  .auth-bottom{
+    background:var(--cream);
+    border-radius:46% 46% 0 0 / 70px 70px 0 0;
+    margin-top:-48px;
+    position:relative; z-index:2;
+    padding:52px 34px 30px;
+  }
+  .auth-title{
+    text-align:center;
+    font-size:1.5rem;
+    color:var(--forest);
+    margin-bottom:22px;
+  }
+  .pill-field{margin-bottom:14px;}
+  .pill-field input{
+    width:100%; padding:14px 20px;
+    border:1.5px solid var(--forest);
+    border-radius:999px;
+    background:var(--paper);
+    font-family:'Work Sans', sans-serif; font-size:0.95rem;
+    color:var(--ink);
+  }
+  .pill-field input:focus{outline:2px solid var(--moss); outline-offset:2px;}
+  .auth-forgot{
+    text-align:right; font-size:0.82rem; color:var(--soil-dark);
+    margin-bottom:22px; cursor:default;
+  }
+  .pill-btn{
+    display:block; width:100%;
+    padding:15px; border-radius:999px;
+    background:var(--forest); color:var(--cream);
+    border:none; font-family:'Fraunces', serif; font-weight:600; font-size:1.05rem;
+    cursor:pointer; text-align:center;
+  }
+  .pill-btn:hover{background:var(--moss-dark);}
+  .auth-box .modal-error{margin-bottom:14px; text-align:center;}
+  .auth-box .modal-switch{margin-top:20px;}
+
+  /* ---------- AUTH: locked state on camera ---------- */
+  .cam-locked-note{
+    margin-top:14px; font-size:0.85rem; color:#F6E9C9;
+    background:rgba(198,139,61,0.18); border:1px solid rgba(198,139,61,0.4);
+    padding:12px 14px;
+  }
+  .cam-locked-note button{
+    background:none; border:none; color:#F6E9C9; text-decoration:underline;
+    cursor:pointer; font-weight:600; font-family:'Work Sans', sans-serif; font-size:0.85rem;
+  }
+
+  /* ---------- HISTORY ---------- */
+  .history-block{margin-top:24px; padding-top:20px; border-top:1px solid rgba(246,242,228,0.14);}
+  .history-block h4{
+    font-size:0.85rem; color:var(--cream); margin-bottom:12px; font-weight:600;
+  }
+  .history-empty{font-size:0.85rem; color:#9BAE87;}
+  .history-item{
+    display:flex; justify-content:space-between; gap:10px;
+    font-size:0.82rem; color:#C9D9B8;
+    padding:9px 0; border-top:1px solid rgba(246,242,228,0.1);
+  }
+  .history-item:first-child{border-top:none;}
+
+  /* ---------- ACTIVITY LOG SECTION ---------- */
+  .activity-head{
+    display:flex; justify-content:space-between; align-items:flex-end; gap:20px;
+    margin-bottom:32px; flex-wrap:wrap;
+  }
+  .activity-head .section-tag{color:var(--soil-dark);}
+  .btn-upload{
+    display:inline-flex; align-items:center; gap:8px;
+    background:var(--paper); border:1px solid var(--forest); color:var(--forest);
+  }
+  .btn-upload:hover{background:var(--forest); color:var(--cream);}
+  .btn-upload svg{width:16px; height:16px;}
+
+  .activity-locked{
+    border:1px solid var(--line); padding:24px 28px;
+    font-size:0.92rem; color:#3B4230; margin-bottom:24px;
+    display:none;
+  }
+  .activity-locked button{
+    background:none; border:none; color:var(--moss-dark);
+    text-decoration:underline; cursor:pointer; font-weight:600;
+    font-family:'Work Sans', sans-serif; font-size:0.92rem;
+  }
+
+  .activity-list{border-top:1px solid var(--line);}
+  .activity-row{
+    border:1px solid var(--line); border-top:none;
+    padding:20px 24px;
+    display:flex; flex-direction:column; gap:6px;
+  }
+  .activity-row.empty-day{background:var(--paper-dim);}
+  .activity-row .a-top{
+    display:flex; justify-content:space-between; align-items:center; gap:12px;
+  }
+  .activity-row .a-date{
+    font-family:'Fraunces', serif; font-weight:600; color:var(--forest); font-size:1rem;
+  }
+  .activity-row .a-pin{width:18px; height:18px; color:var(--moss); flex-shrink:0;}
+  .activity-row .a-status{font-size:0.9rem;}
+  .activity-row .a-status.ok{color:var(--moss-dark);}
+  .activity-row .a-status.empty{color:#B08A5A;}
+  .activity-row .a-meta{
+    display:flex; justify-content:space-between; align-items:center;
+    font-size:0.85rem; color:#5A6250;
+  }
+  .activity-row .a-detail-btn{
+    background:none; border:none; color:var(--moss-dark); text-decoration:underline;
+    cursor:pointer; font-size:0.85rem; font-family:'Work Sans', sans-serif;
+  }
+  .activity-detail{
+    display:none;
+    margin-top:10px; padding-top:12px; border-top:1px dashed var(--line);
+    font-size:0.88rem; color:#3B4230;
+  }
+  .activity-detail.open{display:block;}
+  .activity-detail img{max-width:220px; margin-top:10px; border:1px solid var(--line);}
+
+  /* ---------- UPLOAD MODAL ---------- */
+  .upload-field textarea{
+    width:100%; padding:11px 12px; min-height:90px; resize:vertical;
+    border:1px solid var(--line); background:var(--paper);
+    font-family:'Work Sans', sans-serif; font-size:0.95rem; color:var(--ink);
+  }
+  .upload-field textarea:focus{outline:2px solid var(--moss); outline-offset:1px;}
+  .upload-hint{font-size:0.8rem; color:#5A6250; margin-bottom:16px;}
+
+  /* ---------- REWARD SECTION ---------- */
+  .reward-locked{
+    border:1px solid var(--line); padding:24px 28px;
+    font-size:0.92rem; color:#3B4230;
+  }
+  .reward-locked a{color:var(--moss-dark); font-weight:600; text-decoration:underline;}
+
+  .reward-status-row{
+    display:flex; justify-content:space-between; align-items:flex-end; gap:24px;
+    flex-wrap:wrap; margin-bottom:28px;
+  }
+  .reward-status-row label{
+    display:block; font-size:0.82rem; color:var(--forest); font-weight:600; margin-bottom:6px;
+  }
+  .reward-status-row select{
+    padding:11px 14px; min-width:260px;
+    border:1px solid var(--forest); background:var(--paper);
+    font-family:'Work Sans', sans-serif; font-size:0.95rem; color:var(--ink);
+  }
+  .reward-status-row select:focus{outline:2px solid var(--moss); outline-offset:1px;}
+  .reward-status-note{font-size:0.8rem; color:#5A6250; max-width:38ch;}
+
+  .reward-card{
+    border:1px solid var(--line); background:var(--cream);
+    padding:36px;
+  }
+  .reward-card .r-tag{
+    font-size:0.82rem; color:var(--soil-dark); font-weight:600; margin-bottom:10px;
+  }
+  .reward-card h3{font-size:1.35rem; margin-bottom:14px;}
+  .reward-card .r-desc{font-size:0.96rem; color:#3B4230; max-width:62ch; margin-bottom:26px;}
+
+  .reward-items{
+    display:grid; grid-template-columns:repeat(2,1fr); gap:1px;
+    background:var(--line); border:1px solid var(--line); margin-bottom:26px;
+  }
+  @media (max-width:640px){ .reward-items{grid-template-columns:1fr;} }
+  .reward-item{
+    background:var(--paper); padding:16px 18px;
+    display:flex; justify-content:space-between; align-items:center; gap:12px; font-size:0.92rem;
+  }
+  .reward-item .qty{color:var(--soil-dark); font-weight:600; text-align:right;}
+
+  .reward-amount{
+    font-family:'Fraunces', serif; font-size:clamp(1.5rem, 4vw, 2.3rem); color:var(--forest); margin-bottom:6px;
+  }
+  .reward-amount-note{font-size:0.85rem; color:#5A6250; margin-bottom:26px;}
+
+  .reward-claimed{
+    margin-top:16px; font-size:0.88rem; color:var(--moss-dark); font-weight:600;
+  }
 </style>
 </head>
 <body>
@@ -446,11 +811,65 @@
       <a href="#edukasi">Edukasi</a>
       <a href="#praktik">Praktik</a>
       <a href="#kamera">Verifikasi Lahan</a>
+      <a href="#kegiatan">Riwayat Kegiatan</a>
+      <a href="#reward">Reward Lahan</a>
       <a href="#alasan">Kenapa Penting</a>
     </div>
-    <a href="#kamera" class="navcta">Buka Kamera Lahan</a>
+    <div class="auth-area">
+      <button class="navcta" id="btnOpenAuth" style="border:1px solid var(--forest); cursor:pointer;">Masuk / Daftar</button>
+      <div class="user-chip" id="userChip">
+        <div class="avatar" id="userAvatar">?</div>
+        <span id="userNameLabel">Nama</span>
+        <button id="btnLogout">Keluar</button>
+      </div>
+    </div>
   </nav>
 </header>
+
+<!-- MODAL AUTH -->
+<div class="modal-overlay" id="authOverlay">
+  <div class="auth-box">
+    <button class="modal-close auth-close" id="btnCloseAuth">✕</button>
+
+    <div class="auth-top">
+      <div class="auth-logo">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M12 21C12 21 5 16.5 5 10.5C5 6.9 7.9 4 11.5 4C11.85 6.9 13 9.5 15 11.5C17 13.5 19 14.5 19 14.5C17.5 18.5 14.5 21 12 21Z" fill="#F2C572"/></svg>
+      </div>
+    </div>
+
+    <div class="auth-bottom">
+      <div id="loginPanel">
+        <h3 class="auth-title">Sign In</h3>
+        <div class="modal-error" id="loginError">Nama pengguna atau kata sandi salah.</div>
+        <div class="pill-field">
+          <input type="text" id="loginUsername" placeholder="Username">
+        </div>
+        <div class="pill-field">
+          <input type="password" id="loginPassword" placeholder="Password">
+        </div>
+        <div class="auth-forgot">Lupa kata sandi?</div>
+        <button class="pill-btn" id="btnDoLogin">Login</button>
+        <div class="modal-switch">Belum punya akun? <button id="toRegister">Daftar di sini</button></div>
+      </div>
+
+      <div id="registerPanel" style="display:none;">
+        <h3 class="auth-title">Daftar Akun</h3>
+        <div class="modal-error" id="registerError">Nama pengguna sudah dipakai.</div>
+        <div class="pill-field">
+          <input type="text" id="regName" placeholder="Nama lengkap">
+        </div>
+        <div class="pill-field">
+          <input type="text" id="regUsername" placeholder="Username">
+        </div>
+        <div class="pill-field">
+          <input type="password" id="regPassword" placeholder="Password">
+        </div>
+        <button class="pill-btn" id="btnDoRegister">Daftar</button>
+        <div class="modal-switch">Sudah punya akun? <button id="toLogin">Masuk di sini</button></div>
+      </div>
+    </div>
+  </div>
+</div>
 
 <!-- HERO -->
 <section class="hero">
@@ -464,7 +883,6 @@
         <a href="#edukasi" class="btn btn-ghost">Pelajari Praktiknya</a>
       </div>
       <div class="hero-stats">
-        <div><div class="num">5</div><div class="lbl">Prinsip inti pertanian ramah lingkungan</div></div>
         <div><div class="num">Live</div><div class="lbl">Kamera & lokasi real-time</div></div>
         <div><div class="num">0</div><div class="lbl">Data disimpan diam-diam</div></div>
       </div>
@@ -595,18 +1013,46 @@
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="2" y="6" width="15" height="12" rx="1"/><path d="M17 10l5-3v10l-5-3"/></svg>
             <span>Kamera belum aktif. Tekan "Nyalakan Kamera" untuk mulai merekam kondisi lahan secara langsung.</span>
           </div>
+          <div class="geotag-overlay" id="geotagOverlay">
+            <div class="geotag-row">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C7.6 2 4 5.6 4 10c0 6 8 12 8 12s8-6 8-12c0-4.4-3.6-8-8-8zm0 11a3 3 0 110-6 3 3 0 010 6z"/></svg>
+              <span class="geotag-coords" id="geotagCoords">Mencari lokasi…</span>
+            </div>
+            <div class="geotag-address" id="geotagAddress"></div>
+            <div class="geotag-time" id="geotagTime"></div>
+            <div class="geotag-brand">
+              <svg viewBox="0 0 24 24" fill="currentColor" style="width:11px;height:11px;"><path d="M12 21C12 21 5 16.5 5 10.5C5 6.9 7.9 4 11.5 4C11.85 6.9 13 9.5 15 11.5C17 13.5 19 14.5 19 14.5C17.5 18.5 14.5 21 12 21Z"/></svg>
+              Tanah Bersih • Verifikasi Lahan
+            </div>
+          </div>
         </div>
+        <canvas id="captureCanvas" style="display:none;"></canvas>
         <div class="cam-controls">
           <button class="btn btn-cam" id="btnStart">Nyalakan Kamera</button>
+          <button class="btn btn-capture" id="btnCapture" style="display:none;" disabled>Ambil Foto Bergeotag</button>
           <button class="btn btn-cam-off" id="btnStop" style="display:none;">Matikan Kamera</button>
         </div>
         <p class="cam-note">Kamera dan lokasi hanya diproses di perangkatmu saat ini juga — halaman ini tidak mengunggah atau menyimpan data ke server mana pun.</p>
+        <div class="cam-locked-note" id="camLockedNote">
+          Masuk atau daftar dulu supaya hasil verifikasi tersimpan atas namamu.
+          <button id="camLockedLoginBtn">Masuk / Daftar</button>
+        </div>
+
+        <div class="capture-result" id="captureResult">
+          <h4>Foto lahan dengan geotag</h4>
+          <img id="captureImg" alt="Foto lahan dengan stempel lokasi">
+          <div class="capture-actions">
+            <a class="btn btn-cam" id="btnDownload" download="verifikasi-lahan.jpg">Unduh Foto</a>
+            <button class="btn btn-capture" id="btnRetake">Ambil Ulang</button>
+          </div>
+        </div>
       </div>
 
       <div class="verify-card">
         <h3>Kartu Verifikasi Lahan</h3>
-        <p>Data berikut terisi otomatis saat kamera dan lokasi aktif.</p>
+        <p id="verifyOwner">Masuk dulu untuk melihat kartu verifikasi milikmu.</p>
 
+        <div class="vrow"><span class="k">Petani</span><span class="v" id="vOwnerName">—</span></div>
         <div class="vrow"><span class="k">Status kamera</span><span class="v" id="vCam">Nonaktif</span></div>
         <div class="vrow"><span class="k">Lintang</span><span class="v" id="vLat">—</span></div>
         <div class="vrow"><span class="k">Bujur</span><span class="v" id="vLng">—</span></div>
@@ -614,7 +1060,82 @@
         <div class="vrow"><span class="k">Waktu pengambilan</span><span class="v" id="vTime">—</span></div>
 
         <div class="status-pill off" id="statusPill">Menunggu verifikasi</div>
+
+        <div class="history-block">
+          <h4>Riwayat verifikasi kamu</h4>
+          <div id="historyList"><div class="history-empty">Belum ada riwayat.</div></div>
+        </div>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- RIWAYAT KEGIATAN HARIAN -->
+<section id="kegiatan">
+  <div class="wrap">
+    <div class="activity-head">
+      <div>
+        <div class="section-tag">Riwayat Kegiatan</div>
+        <h2>Kegiatan harian di lahanmu</h2>
+      </div>
+      <button class="btn btn-upload" id="btnOpenUpload">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 4v12M6 10l6-6 6 6"/><path d="M4 20h16"/></svg>
+        Unggah Kegiatan
+      </button>
+    </div>
+
+    <div class="activity-locked" id="activityLocked" style="display:block;">
+      Masuk atau daftar dulu untuk melihat dan mengunggah riwayat kegiatan harianmu.
+      <button id="activityLoginBtn">Masuk / Daftar</button>
+    </div>
+
+    <div class="activity-list" id="activityList"></div>
+  </div>
+</section>
+
+<!-- MODAL UNGGAH KEGIATAN -->
+<div class="modal-overlay" id="uploadOverlay">
+  <div class="modal-box">
+    <button class="modal-close" id="btnCloseUpload">✕</button>
+    <h3>Unggah kegiatan harian</h3>
+    <p class="modal-sub">Catat aktivitas ramah lingkungan yang kamu lakukan di lahan hari ini.</p>
+    <div class="upload-field">
+      <label style="display:block; font-size:0.82rem; color:var(--forest); margin-bottom:6px; font-weight:600;">Catatan kegiatan</label>
+      <textarea id="uploadNote" placeholder="mis. Menyebar kompos di petak barat, memeriksa saluran irigasi tetes…"></textarea>
+    </div>
+    <p class="upload-hint" id="uploadGeoHint">Lokasi & waktu diambil otomatis dari sesi kamera terakhir kalau sudah pernah dipakai hari ini.</p>
+    <button class="btn btn-primary modal-submit" id="btnDoUpload">Unggah</button>
+  </div>
+</div>
+
+<!-- REWARD LAHAN -->
+<section id="reward">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <div class="section-tag">Reward Lahan</div>
+        <h2>Dukungan yang menyesuaikan kondisi lahanmu</h2>
+      </div>
+      <p>Begitu foto verifikasi lahanmu ada, kamu berhak atas dukungan — bentuknya berbeda tergantung sudah sebaik apa kondisi tanahnya saat ini.</p>
+    </div>
+
+    <div class="reward-locked" id="rewardLocked">
+      Ambil foto verifikasi lahan dulu di bagian <a href="#kamera">Verifikasi Lahan</a> supaya dukungan untuk lahanmu bisa muncul di sini.
+    </div>
+
+    <div class="reward-body" id="rewardBody" style="display:none;">
+      <div class="reward-status-row">
+        <div>
+          <label for="rewardStatusSelect">Status kondisi lahan (hasil penilaian)</label>
+          <select id="rewardStatusSelect">
+            <option value="buruk">Masih perlu perbaikan</option>
+            <option value="baik">Sudah membaik</option>
+          </select>
+        </div>
+        <p class="reward-status-note">*Pada prototipe ini status dipilih manual sebagai simulasi. Pada versi nyata, status ini idealnya berasal dari penilaian tim lapangan atau sistem penilai foto.</p>
+      </div>
+
+      <div class="reward-card" id="rewardCard"><!-- diisi lewat JS --></div>
     </div>
   </div>
 </section>
@@ -687,25 +1208,402 @@
 </footer>
 
 <script>
+  /* ====================================================================
+     CATATAN DEMO: seluruh data akun & riwayat di bawah ini HANYA disimpan
+     di memori browser (variabel JS), BUKAN localStorage atau server.
+     Artinya semua akun & riwayat akan hilang saat halaman di-refresh.
+     Ini cukup untuk prototipe; untuk versi nyata butuh backend + database
+     supaya password aman (ter-hash) dan data permanen.
+  ==================================================================== */
+
+  // "Database" sementara di memori
+  const usersDB = {};     // { username: { name, password } }
+  let currentUser = null; // username yang sedang login
+  const historyDB = {};   // { username: [ {lat,lng,acc,time} ] }
+  const activityDB = {};  // { username: [ {dateKey:'2026-09-12', dateLabel, time, note, lat, lng, address} ] }
+  const rewardDB = {};    // { username: { hasPhoto:false, status:'buruk'|'baik', claimed:false } }
+
+  // Data reward: kalau lahan masih buruk -> bantuan sarana (barang), kalau sudah bagus -> upah tunai
+  const REWARD_INFO = {
+    buruk: {
+      label: 'Masih perlu perbaikan',
+      tag: 'Bantuan Sarana Produksi',
+      desc: 'Karena kondisi lahan berdasarkan foto verifikasi masih dalam tahap pemulihan, dukungan diberikan dalam bentuk sarana produksi — bukan uang tunai — supaya benar-benar terpakai untuk memperbaiki kondisi tanah.',
+      items: [
+        { name:'Pupuk kompos / organik', qty:'1 karung (50 kg)' },
+        { name:'Bibit tanaman penambat nitrogen', qty:'1 paket tanam' },
+        { name:'Mikroba starter pengurai tanah', qty:'1 botol' },
+        { name:'Alat uji pH tanah sederhana', qty:'1 unit' }
+      ],
+      cta:'Klaim Bantuan Sarana',
+      claimedNote:'Bantuan sudah diklaim — tim lapangan akan menghubungimu untuk pengiriman.'
+    },
+    baik: {
+      label: 'Sudah membaik',
+      tag: 'Upah Pengembangan Lahan',
+      desc: 'Karena kondisi lahan sudah menunjukkan perbaikan yang konsisten dari verifikasi sebelumnya, dukungan diberikan dalam bentuk upah tunai yang bisa dipakai bebas untuk mengembangkan lahan lebih jauh.',
+      amount:'Rp3.000.000 – Rp5.000.000',
+      amountNote:'per periode verifikasi, besar nominal tergantung tingkat perbaikan lahan (contoh nominal, dapat disesuaikan)',
+      cta:'Klaim Upah',
+      claimedNote:'Upah sudah diklaim — dana akan diproses ke rekening/e-wallet yang terdaftar.'
+    }
+  };
+
+  // ---------- Elemen modal & auth ----------
+  const authOverlay = document.getElementById('authOverlay');
+  const btnOpenAuth = document.getElementById('btnOpenAuth');
+  const btnCloseAuth = document.getElementById('btnCloseAuth');
+  const camLockedLoginBtn = document.getElementById('camLockedLoginBtn');
+  const loginPanel = document.getElementById('loginPanel');
+  const registerPanel = document.getElementById('registerPanel');
+  const toRegister = document.getElementById('toRegister');
+  const toLogin = document.getElementById('toLogin');
+  const loginError = document.getElementById('loginError');
+  const registerError = document.getElementById('registerError');
+  const userChip = document.getElementById('userChip');
+  const userAvatar = document.getElementById('userAvatar');
+  const userNameLabel = document.getElementById('userNameLabel');
+  const btnLogout = document.getElementById('btnLogout');
+  const camLockedNote = document.getElementById('camLockedNote');
+  const verifyOwner = document.getElementById('verifyOwner');
+  const vOwnerName = document.getElementById('vOwnerName');
+  const historyList = document.getElementById('historyList');
+  const activityLocked = document.getElementById('activityLocked');
+  const activityLoginBtn = document.getElementById('activityLoginBtn');
+  const activityList = document.getElementById('activityList');
+  const btnOpenUpload = document.getElementById('btnOpenUpload');
+  const uploadOverlay = document.getElementById('uploadOverlay');
+  const btnCloseUpload = document.getElementById('btnCloseUpload');
+  const uploadNote = document.getElementById('uploadNote');
+  const btnDoUpload = document.getElementById('btnDoUpload');
+  const rewardLocked = document.getElementById('rewardLocked');
+  const rewardBody = document.getElementById('rewardBody');
+  const rewardStatusSelect = document.getElementById('rewardStatusSelect');
+  const rewardCard = document.getElementById('rewardCard');
+
+  function openAuth(showRegister){
+    authOverlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    loginError.classList.remove('show');
+    registerError.classList.remove('show');
+    if(showRegister){
+      loginPanel.style.display = 'none';
+      registerPanel.style.display = 'block';
+    }else{
+      loginPanel.style.display = 'block';
+      registerPanel.style.display = 'none';
+    }
+  }
+  function closeAuth(){
+    authOverlay.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  btnOpenAuth.addEventListener('click', () => openAuth(false));
+  camLockedLoginBtn.addEventListener('click', () => openAuth(false));
+  // Catatan: auth overlay ini WAJIB, tidak ada tombol tutup / klik-luar-untuk-tutup,
+  // supaya user harus login atau daftar dulu sebelum bisa akses halaman utama.
+  toRegister.addEventListener('click', () => openAuth(true));
+  toLogin.addEventListener('click', () => openAuth(false));
+
+  document.getElementById('btnDoRegister').addEventListener('click', () => {
+    const name = document.getElementById('regName').value.trim();
+    const username = document.getElementById('regUsername').value.trim();
+    const password = document.getElementById('regPassword').value;
+
+    if(!name || !username || !password){
+      registerError.textContent = 'Semua kolom wajib diisi.';
+      registerError.classList.add('show');
+      return;
+    }
+    if(usersDB[username]){
+      registerError.textContent = 'Nama pengguna sudah dipakai, coba yang lain.';
+      registerError.classList.add('show');
+      return;
+    }
+    usersDB[username] = { name, password };
+    historyDB[username] = [];
+    activityDB[username] = [];
+    rewardDB[username] = { hasPhoto:false, status:'buruk', claimed:false };
+    loginUser(username);
+    closeAuth();
+  });
+
+  document.getElementById('btnDoLogin').addEventListener('click', () => {
+    const username = document.getElementById('loginUsername').value.trim();
+    const password = document.getElementById('loginPassword').value;
+    const user = usersDB[username];
+
+    if(!user || user.password !== password){
+      loginError.textContent = 'Nama pengguna atau kata sandi salah.';
+      loginError.classList.add('show');
+      return;
+    }
+    loginUser(username);
+    closeAuth();
+  });
+
+  function loginUser(username){
+    currentUser = username;
+    const user = usersDB[username];
+
+    // update nav
+    btnOpenAuth.style.display = 'none';
+    userChip.style.display = 'flex';
+    userAvatar.textContent = user.name.trim().charAt(0).toUpperCase();
+    userNameLabel.textContent = user.name;
+
+    // update kartu verifikasi
+    verifyOwner.textContent = 'Kartu ini khusus milik ' + user.name + '.';
+    vOwnerName.textContent = user.name;
+
+    // buka kunci kamera
+    camLockedNote.style.display = 'none';
+
+    // buka kunci riwayat kegiatan
+    activityLocked.style.display = 'none';
+
+    renderHistory();
+    renderActivity();
+    renderReward();
+  }
+
+  btnLogout.addEventListener('click', () => {
+    stopCamera();
+    currentUser = null;
+    btnOpenAuth.style.display = 'inline-flex';
+    userChip.style.display = 'none';
+    verifyOwner.textContent = 'Masuk dulu untuk melihat kartu verifikasi milikmu.';
+    vOwnerName.textContent = '—';
+    camLockedNote.style.display = 'block';
+    activityLocked.style.display = 'block';
+    activityList.innerHTML = '';
+    resetVerifyDisplay();
+    historyList.innerHTML = '<div class="history-empty">Belum ada riwayat.</div>';
+    renderReward();
+    openAuth(false); // wajib login lagi setelah keluar
+  });
+
+  function renderHistory(){
+    const items = historyDB[currentUser] || [];
+    if(items.length === 0){
+      historyList.innerHTML = '<div class="history-empty">Belum ada riwayat.</div>';
+      return;
+    }
+    historyList.innerHTML = items.slice().reverse().map(item => `
+      <div class="history-item">
+        <span>${item.time}</span>
+        <span style="text-align:right; max-width:60%;">${item.address ? item.address : (item.lat + ', ' + item.lng)}</span>
+      </div>
+    `).join('');
+  }
+
+  // ---------- RIWAYAT KEGIATAN HARIAN ----------
+  const HARI_ID = ['Minggu','Senin','Selasa','Rabu','Kamis','Jumat','Sabtu'];
+  const BULAN_ID = ['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'];
+
+  function dateKeyOf(d){
+    return d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0');
+  }
+  function dateLabelOf(d){
+    return 'Tanggal, ' + d.getDate() + ' ' + BULAN_ID[d.getMonth()] + ' ' + d.getFullYear();
+  }
+
+  function renderActivity(){
+    if(!currentUser){ activityList.innerHTML = ''; return; }
+    const entries = activityDB[currentUser] || [];
+    const byDate = {};
+    entries.forEach(e => { byDate[e.dateKey] = e; });
+
+    const today = new Date();
+    let rows = '';
+    for(let i = 0; i < 6; i++){
+      const d = new Date(today);
+      d.setDate(today.getDate() - i);
+      const key = dateKeyOf(d);
+      const label = dateLabelOf(d);
+      const entry = byDate[key];
+
+      if(entry){
+        rows += `
+          <div class="activity-row">
+            <div class="a-top">
+              <span class="a-date">${label}</span>
+              <svg class="a-pin" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C7.6 2 4 5.6 4 10c0 6 8 12 8 12s8-6 8-12c0-4.4-3.6-8-8-8zm0 11a3 3 0 110-6 3 3 0 010 6z"/></svg>
+            </div>
+            <div class="a-status ok">Berhasil mengunggah kegiatan harian</div>
+            <div class="a-meta">
+              <span>Pukul ${entry.time}</span>
+              <button class="a-detail-btn" data-key="${key}">Detail</button>
+            </div>
+            <div class="activity-detail" id="detail-${key}">
+              <p>${entry.note ? entry.note : '(Tidak ada catatan tambahan)'}</p>
+              ${entry.address ? `<p style="margin-top:6px; color:#5A6250;">📍 ${entry.address}</p>` : ''}
+            </div>
+          </div>`;
+      }else{
+        rows += `
+          <div class="activity-row empty-day">
+            <div class="a-top">
+              <span class="a-date">${label}</span>
+              <svg class="a-pin" viewBox="0 0 24 24" fill="currentColor" style="opacity:0.3;"><path d="M12 2C7.6 2 4 5.6 4 10c0 6 8 12 8 12s8-6 8-12c0-4.4-3.6-8-8-8zm0 11a3 3 0 110-6 3 3 0 010 6z"/></svg>
+            </div>
+            <div class="a-status empty">Tidak ada unggah kegiatan harian</div>
+          </div>`;
+      }
+    }
+    activityList.innerHTML = rows;
+
+    activityList.querySelectorAll('.a-detail-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const el = document.getElementById('detail-' + btn.dataset.key);
+        el.classList.toggle('open');
+        btn.textContent = el.classList.contains('open') ? 'Tutup' : 'Detail';
+      });
+    });
+  }
+
+  // ---------- REWARD LAHAN ----------
+  function renderReward(){
+    if(!currentUser){
+      rewardLocked.style.display = 'block';
+      rewardLocked.innerHTML = 'Masuk atau daftar dulu, lalu ambil foto verifikasi lahan di bagian <a href="#kamera">Verifikasi Lahan</a> supaya dukungan untuk lahanmu bisa muncul di sini.';
+      rewardBody.style.display = 'none';
+      return;
+    }
+    const r = rewardDB[currentUser];
+    if(!r || !r.hasPhoto){
+      rewardLocked.style.display = 'block';
+      rewardLocked.innerHTML = 'Ambil foto verifikasi lahan dulu di bagian <a href="#kamera">Verifikasi Lahan</a> supaya dukungan untuk lahanmu bisa muncul di sini.';
+      rewardBody.style.display = 'none';
+      return;
+    }
+    rewardLocked.style.display = 'none';
+    rewardBody.style.display = 'block';
+    rewardStatusSelect.value = r.status;
+    renderRewardCard();
+  }
+
+  function renderRewardCard(){
+    const r = rewardDB[currentUser];
+    if(!r) return;
+    const info = REWARD_INFO[r.status];
+
+    if(r.status === 'buruk'){
+      rewardCard.innerHTML = `
+        <div class="r-tag">${info.tag}</div>
+        <h3>${info.label}</h3>
+        <p class="r-desc">${info.desc}</p>
+        <div class="reward-items">
+          ${info.items.map(it => `<div class="reward-item"><span>${it.name}</span><span class="qty">${it.qty}</span></div>`).join('')}
+        </div>
+        <button class="btn btn-primary" id="btnClaimReward">${info.cta}</button>
+        ${r.claimed ? `<div class="reward-claimed">${info.claimedNote}</div>` : ''}
+      `;
+    }else{
+      rewardCard.innerHTML = `
+        <div class="r-tag">${info.tag}</div>
+        <h3>${info.label}</h3>
+        <p class="r-desc">${info.desc}</p>
+        <div class="reward-amount">${info.amount}</div>
+        <div class="reward-amount-note">${info.amountNote}</div>
+        <button class="btn btn-primary" id="btnClaimReward">${info.cta}</button>
+        ${r.claimed ? `<div class="reward-claimed">${info.claimedNote}</div>` : ''}
+      `;
+    }
+
+    document.getElementById('btnClaimReward').addEventListener('click', () => {
+      rewardDB[currentUser].claimed = true;
+      renderRewardCard();
+    });
+  }
+
+  rewardStatusSelect.addEventListener('change', () => {
+    if(!currentUser) return;
+    rewardDB[currentUser].status = rewardStatusSelect.value;
+    rewardDB[currentUser].claimed = false;
+    renderRewardCard();
+  });
+
+  activityLoginBtn.addEventListener('click', () => openAuth(false));
+
+  btnOpenUpload.addEventListener('click', () => {
+    if(!currentUser){ openAuth(false); return; }
+    uploadNote.value = '';
+    uploadOverlay.classList.add('open');
+  });
+  btnCloseUpload.addEventListener('click', () => uploadOverlay.classList.remove('open'));
+  uploadOverlay.addEventListener('click', (e) => { if(e.target === uploadOverlay) uploadOverlay.classList.remove('open'); });
+
+  btnDoUpload.addEventListener('click', () => {
+    if(!currentUser) return;
+    const now = new Date();
+    const entry = {
+      dateKey: dateKeyOf(now),
+      time: now.toLocaleTimeString('id-ID', { hour:'2-digit', minute:'2-digit' }),
+      note: uploadNote.value.trim(),
+      lat: currentGeo ? currentGeo.latStr : null,
+      lng: currentGeo ? currentGeo.lngStr : null,
+      address: currentGeo ? currentGeo.address : null
+    };
+    // ganti entri hari ini kalau sudah ada, atau tambah baru
+    const list = activityDB[currentUser];
+    const idx = list.findIndex(e => e.dateKey === entry.dateKey);
+    if(idx >= 0){ list[idx] = entry; } else { list.push(entry); }
+
+    uploadOverlay.classList.remove('open');
+    renderActivity();
+  });
+
+  // ---------- Kamera & lokasi (per user) ----------
   const btnStart = document.getElementById('btnStart');
   const btnStop = document.getElementById('btnStop');
+  const btnCapture = document.getElementById('btnCapture');
+  const btnRetake = document.getElementById('btnRetake');
+  const btnDownload = document.getElementById('btnDownload');
   const camFrame = document.getElementById('camFrame');
   const camVideo = document.getElementById('camVideo');
+  const captureCanvas = document.getElementById('captureCanvas');
+  const captureResult = document.getElementById('captureResult');
+  const captureImg = document.getElementById('captureImg');
   const vCam = document.getElementById('vCam');
   const vLat = document.getElementById('vLat');
   const vLng = document.getElementById('vLng');
   const vAcc = document.getElementById('vAcc');
   const vTime = document.getElementById('vTime');
   const statusPill = document.getElementById('statusPill');
+  const geotagOverlay = document.getElementById('geotagOverlay');
+  const geotagCoords = document.getElementById('geotagCoords');
+  const geotagAddress = document.getElementById('geotagAddress');
+  const geotagTime = document.getElementById('geotagTime');
 
   let stream = null;
+  let currentGeo = null; // { latStr, lngStr, address, timeStr, rawLat, rawLng }
 
   function setStatus(text, verified){
     statusPill.textContent = text;
     statusPill.classList.toggle('off', !verified);
   }
 
+  function resetVerifyDisplay(){
+    vCam.textContent = 'Nonaktif';
+    vLat.textContent = '—';
+    vLng.textContent = '—';
+    vAcc.textContent = '—';
+    vTime.textContent = '—';
+    setStatus('Menunggu verifikasi', false);
+    geotagCoords.textContent = 'Mencari lokasi…';
+    geotagAddress.textContent = '';
+    geotagTime.textContent = '';
+    btnCapture.disabled = true;
+    currentGeo = null;
+  }
+
   async function startCamera(){
+    if(!currentUser){
+      openAuth(false);
+      return;
+    }
     try{
       stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment' }, audio: false });
       camVideo.srcObject = stream;
@@ -713,6 +1611,7 @@
       vCam.textContent = 'Aktif';
       btnStart.style.display = 'none';
       btnStop.style.display = 'inline-flex';
+      btnCapture.style.display = 'inline-flex';
       setStatus('Kamera aktif, menunggu lokasi…', false);
       requestLocation();
     }catch(err){
@@ -727,38 +1626,158 @@
       stream = null;
     }
     camFrame.classList.remove('live');
-    vCam.textContent = 'Nonaktif';
-    btnStart.style.display = 'inline-flex';
-    btnStop.style.display = 'none';
-    setStatus('Menunggu verifikasi', false);
+    if(btnStart){
+      btnStart.style.display = 'inline-flex';
+      btnStop.style.display = 'none';
+      btnCapture.style.display = 'none';
+    }
+    captureResult.classList.remove('show');
+  }
+
+  // Reverse geocoding pakai OpenStreetMap Nominatim (gratis, tanpa API key)
+  async function reverseGeocode(lat, lng){
+    try{
+      const res = await fetch(`https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${lat}&lon=${lng}&zoom=16&addressdetails=1`, {
+        headers: { 'Accept': 'application/json' }
+      });
+      if(!res.ok) throw new Error('gagal');
+      const data = await res.json();
+      return data.display_name || 'Alamat tidak ditemukan';
+    }catch(err){
+      return 'Alamat tidak ditemukan (offline atau gagal memuat)';
+    }
   }
 
   function requestLocation(){
     if(!navigator.geolocation){
       vLat.textContent = 'Tidak didukung';
       vLng.textContent = 'Tidak didukung';
+      geotagCoords.textContent = 'Lokasi tidak didukung perangkat ini';
       return;
     }
     navigator.geolocation.getCurrentPosition(
-      (pos) => {
+      async (pos) => {
         const { latitude, longitude, accuracy } = pos.coords;
-        vLat.textContent = latitude.toFixed(5) + '°';
-        vLng.textContent = longitude.toFixed(5) + '°';
+        const latStr = latitude.toFixed(5) + '°';
+        const lngStr = longitude.toFixed(5) + '°';
+        const timeStr = new Date().toLocaleString('id-ID');
+
+        vLat.textContent = latStr;
+        vLng.textContent = lngStr;
         vAcc.textContent = '± ' + Math.round(accuracy) + ' m';
-        vTime.textContent = new Date().toLocaleString('id-ID');
+        vTime.textContent = timeStr;
         setStatus('Lahan terverifikasi', true);
+
+        // tampilkan stempel geotag langsung di video (alamat menyusul)
+        geotagCoords.textContent = latStr + ', ' + lngStr;
+        geotagAddress.textContent = 'Mencari alamat…';
+        geotagTime.textContent = timeStr;
+        btnCapture.disabled = false;
+
+        const address = await reverseGeocode(latitude, longitude);
+        geotagAddress.textContent = address;
+
+        currentGeo = { latStr, lngStr, address, timeStr };
+
+        // simpan ke riwayat user yang sedang login
+        if(currentUser){
+          historyDB[currentUser].push({ lat: latStr, lng: lngStr, time: timeStr, address });
+          renderHistory();
+        }
       },
       (err) => {
         vLat.textContent = 'Ditolak';
         vLng.textContent = 'Ditolak';
+        geotagCoords.textContent = 'Lokasi ditolak';
         setStatus('Izin lokasi ditolak. Aktifkan lewat pengaturan browser.', false);
       },
       { enableHighAccuracy: true, timeout: 10000 }
     );
   }
 
+  // ---------- Ambil foto & bakar stempel geotag ke gambar ----------
+  function wrapText(ctx, text, x, y, maxWidth, lineHeight){
+    const words = text.split(' ');
+    let line = '';
+    const lines = [];
+    for(let n = 0; n < words.length; n++){
+      const testLine = line + words[n] + ' ';
+      if(ctx.measureText(testLine).width > maxWidth && n > 0){
+        lines.push(line);
+        line = words[n] + ' ';
+      }else{
+        line = testLine;
+      }
+    }
+    lines.push(line);
+    lines.forEach((l, i) => ctx.fillText(l.trim(), x, y + i * lineHeight));
+    return lines.length;
+  }
+
+  btnCapture.addEventListener('click', () => {
+    if(!currentGeo) return;
+    const w = camVideo.videoWidth;
+    const h = camVideo.videoHeight;
+    captureCanvas.width = w;
+    captureCanvas.height = h;
+    const ctx = captureCanvas.getContext('2d');
+
+    // gambar frame video apa adanya
+    ctx.drawImage(camVideo, 0, 0, w, h);
+
+    // bar gradasi gelap di bawah untuk latar teks
+    const barHeight = Math.round(h * 0.22);
+    const grad = ctx.createLinearGradient(0, h - barHeight, 0, h);
+    grad.addColorStop(0, 'rgba(10,16,7,0)');
+    grad.addColorStop(0.5, 'rgba(10,16,7,0.75)');
+    grad.addColorStop(1, 'rgba(10,16,7,0.9)');
+    ctx.fillStyle = grad;
+    ctx.fillRect(0, h - barHeight, w, barHeight);
+
+    // teks stempel
+    const pad = Math.round(w * 0.025);
+    let cursorY = h - barHeight + Math.round(w * 0.045);
+    const fontBase = Math.max(14, Math.round(w * 0.022));
+
+    ctx.fillStyle = '#ffffff';
+    ctx.font = `600 ${fontBase + 2}px Georgia, serif`;
+    ctx.fillText(currentGeo.latStr + ', ' + currentGeo.lngStr, pad, cursorY);
+
+    ctx.font = `${fontBase - 2}px Arial, sans-serif`;
+    ctx.fillStyle = 'rgba(255,255,255,0.9)';
+    cursorY += fontBase + 8;
+    const addrLines = wrapText(ctx, currentGeo.address, pad, cursorY, w - pad * 2, fontBase + 4);
+    cursorY += addrLines * (fontBase + 4);
+
+    ctx.fillStyle = 'rgba(255,255,255,0.75)';
+    ctx.font = `${fontBase - 4}px Arial, sans-serif`;
+    ctx.fillText(currentGeo.timeStr, pad, cursorY + 4);
+
+    ctx.fillStyle = 'rgba(255,255,255,0.6)';
+    ctx.font = `${fontBase - 5}px Arial, sans-serif`;
+    ctx.fillText('Tanah Bersih • Verifikasi Lahan', pad, h - Math.round(w * 0.015));
+
+    const dataUrl = captureCanvas.toDataURL('image/jpeg', 0.92);
+    captureImg.src = dataUrl;
+    btnDownload.href = dataUrl;
+    captureResult.classList.add('show');
+
+    // begitu foto verifikasi berhasil diambil, buka bagian reward untuk user ini
+    if(currentUser){
+      if(!rewardDB[currentUser]) rewardDB[currentUser] = { hasPhoto:false, status:'buruk', claimed:false };
+      rewardDB[currentUser].hasPhoto = true;
+      renderReward();
+    }
+  });
+
+  btnRetake.addEventListener('click', () => {
+    captureResult.classList.remove('show');
+  });
+
   btnStart.addEventListener('click', startCamera);
-  btnStop.addEventListener('click', stopCamera);
+  btnStop.addEventListener('click', () => { stopCamera(); resetVerifyDisplay(); });
+  // Wajib login/daftar dulu sebelum bisa akses halaman utama
+  openAuth(false);
 </script>
 
 </body>
